@@ -13,10 +13,12 @@ FULL JOIN FitbitProject..steps_per_hour
 FULL JOIN FitbitProject..weight_info
 	ON daily_activity.Id = weight_info.Id
 --There are 33 unique IDs for the activity logs as well as the steps
---24 unique IDs for the sleep logs and only 8 for the weights infos
+--24 unique IDs for the sleep logs and only 8 for the weights info
 
+	
 ----------------
 
+	
 --2) Count the number of users that overlap in each table
 
 SELECT COUNT(DISTINCT daily_activity.Id) AS Unique_act_ID, 
@@ -32,9 +34,11 @@ JOIN FitbitProject..weight_info
 	ON daily_activity.Id = weight_info.Id
 --There are only 6 unique IDs that overlap in the 4 different tables
 
+	
 ----------------
 
---3) Verify that the IDs are consistent across the tables and shows which are shared or absent from tables 
+	
+--3) Verify that the IDs are consistent across the tables and show which are shared or absent from tables 
 
 SELECT DISTINCT daily_activity.Id AS Unique_act_ID, daily_sleep.Id AS Unique_sleep_ID, steps_per_hour.Id AS Unique_step_ID, weight_info.Id AS Unique_weight_ID
 FROM FitbitProject..daily_activity
@@ -45,8 +49,10 @@ FULL JOIN FitbitProject..steps_per_hour
 FULL JOIN FitbitProject..weight_info
 	ON daily_activity.Id = weight_info.Id
 
+	
 ----------------
 
+	
 --4) Verify only the IDs that overlap in the 4 tables 
 
 SELECT DISTINCT daily_activity.Id AS Unique_act_ID, daily_sleep.Id AS Unique_sleep_ID, steps_per_hour.Id AS Unique_step_ID, weight_info.Id  AS Unique_weight_ID
@@ -58,8 +64,10 @@ JOIN FitbitProject..steps_per_hour
 JOIN FitbitProject..weight_info
 	ON daily_activity.Id = weight_info.Id
 
+	
 ----------------
 
+	
 --5) Average activity stats
 
 SELECT DISTINCT Id,
@@ -74,13 +82,15 @@ SELECT DISTINCT Id,
 FROM FitbitProject..daily_activity                                 --save the result as a table: avg_act_by_ID
 GROUP BY Id
 ORDER BY Id
---From all the users, 21 out of the 33 tracked their data every day of the month
+--Of all the users, 21 out of the 33 tracked their data every day of the month
 --The 7,000 steps bar was achieved by 20 users 
 --20 users are getting at least 20 min of a combination of very and fairly level of activity. 
 --Many exceed 20 minutes with 6 users getting over an hour of this level of activity on average.
 
+	
 ----------------
 
+	
 --6) Average sleep stats 
 
 SELECT Distinct Id,
@@ -92,11 +102,13 @@ SELECT Distinct Id,
 FROM FitbitProject..daily_sleep
 GROUP BY Id                                                      --save the result as a table: avg_sleep_by_ID
 ORDER BY Id
---Only 3 users logged in and tracked their sleep everyday of the month
+--Only 3 users logged in and tracked their sleep every day of the month
 --12 of the users got 7 hours of sleep and more. 
 
+	
 ----------------
 
+	
 --7) Merge the average activity and sleep table into one
 
 SELECT *
@@ -105,8 +117,10 @@ JOIN FitbitProject..avg_sleep_by_ID
 	ON avg_act_by_ID.Id = avg_sleep_by_ID.Id                      --save the result as a table: avg_act_sleep_by_ID
 ORDER BY avg_act_by_ID.Id
 
+	
 ----------------
 
+	
 --8) Find the days where the most and least activity take place on 
 
 DROP TABLE IF exists avg_activity_per_day
@@ -154,13 +168,15 @@ GROUP BY
 	END
 ORDER BY avg_steps
 -- Sunday is the only day of the week with an average number of steps less than 7,000
--- On Tuesdays and Saturdays, the average number of steps made by the users exceeds the 8,000
---Users are wlking on average more than 5 Km every day of the week.
+-- On Tuesdays and Saturdays, the average number of steps made by the users exceeds 8,000
+--Users are walking on average more than 5 Km every day of the week.
 --The average amount of calories burnt every day revolves around 2300 calories, with only Sundays and Thursdays with less than 2,300 calories.
---The most sedentary day are Mondays with an average duration of 1,028 minutes. The least sedentary day are Thursdays with 962 minutes. 
+--The most sedentary day is Mondays with an average duration of 1,028 minutes. The least sedentary day is Thursdays with 962 minutes. 
 
+	
 ----------------
 
+	
 --9) Find the days where the most and least sleep take place on 
 
 DROP TABLE IF exists avg_sleep_per_day
@@ -197,12 +213,14 @@ GROUP BY
 		WHEN 6 THEN 'Fri'
 		WHEN 7 THEN 'Sat'
 	END 
---Users get an average sleeping time of 7 hours on Saturdays, Sundays and Wednesdays. 
+--Users get an average sleeping time of 7 hours on Saturdays, Sundays, and Wednesdays. 
 --For the rest of the week, users sleep on average 6.7 hours
 --Sundays are the days with the most hours awake in bed with 8.39 hours. 
 
+	
 ----------------
 
+	
 --10-a) Activity trends over time 
 
 SELECT DISTINCT Id, ActivityDate,
@@ -217,8 +235,10 @@ FROM FitbitProject..daily_activity
 GROUP BY ActivityDate, Id
 ORDER BY ActivityDate, Id
 
+	
 ----------------
 
+	
 --10-b) Logging trend of the users for the activities
 
 SELECT DISTINCT ActivityDate,
@@ -226,7 +246,7 @@ SELECT DISTINCT ActivityDate,
 FROM FitbitProject..daily_activity                               
 GROUP BY ActivityDate
 ORDER BY ActivityDate
---With time, the number of logs seem to decrease: users commit less and less to the logging
+--With time, the number of logs seems to decrease: users commit less and less to logging
 
 ----------------
 
@@ -239,8 +259,10 @@ FROM FitbitProject..daily_activity
 GROUP BY ActivityDate
 ORDER BY ActivityDate
 
+	
 ----------------
 
+	
 --11-a) Sleep trends over time 	
 
 SELECT DISTINCT Id, SleepDay,
@@ -251,8 +273,10 @@ FROM FitbitProject..daily_sleep
 GROUP BY SleepDay, Id                                                      
 ORDER BY SleepDay, Id
 
+	
 ----------------
 
+	
 --11-b) Logging trend of the users for the activities
 
 SELECT DISTINCT SleepDay,
@@ -260,10 +284,12 @@ SELECT DISTINCT SleepDay,
 FROM FitbitProject..daily_sleep
 GROUP BY SleepDay                                                   
 ORDER BY SleepDay
---Of the 24 users that have a unique IDs for the sleeping data, there are only 13 to 17 logs per day
+--Of the 24 users that have unique IDs for the sleeping data, there are only 13 to 17 logs per day
 
+	
 ----------------
 
+	
 --11-c) Correlation between the average sleeping hours and the average hours spent awake in bed per ID
 
 SELECT DISTINCT  Id,
@@ -274,8 +300,10 @@ GROUP BY  Id
 ORDER BY  Id
 --The longer users sleep, the more time awake they will experience throughout their sleep cycles.
 
+	
 ----------------
 
+	
 --11-d) Average sleeping hours and average hours spent awake in bed over time
 
 SELECT DISTINCT  SleepDay,
@@ -285,8 +313,10 @@ FROM FitbitProject..daily_sleep
 GROUP BY  SleepDay                                                    
 ORDER BY  SleepDay
 
+	
 ----------------
 
+	
 --12) Variation of steps per day
 
 DROP TABLE IF exists avg_step_per_day
