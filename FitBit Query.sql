@@ -15,10 +15,10 @@ FULL JOIN FitbitProject..weight_info
 --There are 33 unique IDs for the activity logs as well as the steps
 --24 unique IDs for the sleep logs and only 8 for the weights info
 
-	
+
 ----------------
 
-	
+
 --2) Count the number of users that overlap in each table
 
 SELECT COUNT(DISTINCT daily_activity.Id) AS Unique_act_ID, 
@@ -34,10 +34,10 @@ JOIN FitbitProject..weight_info
 	ON daily_activity.Id = weight_info.Id
 --There are only 6 unique IDs that overlap in the 4 different tables
 
-	
+
 ----------------
 
-	
+
 --3) Verify that the IDs are consistent across the tables and show which are shared or absent from tables 
 
 SELECT DISTINCT daily_activity.Id AS Unique_act_ID, daily_sleep.Id AS Unique_sleep_ID, steps_per_hour.Id AS Unique_step_ID, weight_info.Id AS Unique_weight_ID
@@ -49,10 +49,10 @@ FULL JOIN FitbitProject..steps_per_hour
 FULL JOIN FitbitProject..weight_info
 	ON daily_activity.Id = weight_info.Id
 
-	
+
 ----------------
 
-	
+
 --4) Verify only the IDs that overlap in the 4 tables 
 
 SELECT DISTINCT daily_activity.Id AS Unique_act_ID, daily_sleep.Id AS Unique_sleep_ID, steps_per_hour.Id AS Unique_step_ID, weight_info.Id  AS Unique_weight_ID
@@ -64,10 +64,10 @@ JOIN FitbitProject..steps_per_hour
 JOIN FitbitProject..weight_info
 	ON daily_activity.Id = weight_info.Id
 
-	
+
 ----------------
 
-	
+
 --5) Average activity stats
 
 SELECT DISTINCT Id,
@@ -87,10 +87,10 @@ ORDER BY Id
 --20 users are getting at least 20 min of a combination of very and fairly level of activity. 
 --Many exceed 20 minutes with 6 users getting over an hour of this level of activity on average.
 
-	
+
 ----------------
 
-	
+
 --6) Average sleep stats 
 
 SELECT Distinct Id,
@@ -105,23 +105,11 @@ ORDER BY Id
 --Only 3 users logged in and tracked their sleep every day of the month
 --12 of the users got 7 hours of sleep and more. 
 
-	
+
 ----------------
 
-	
---7) Merge the average activity and sleep table into one
 
-SELECT *
-FROM FitbitProject..avg_act_by_ID
-JOIN FitbitProject..avg_sleep_by_ID
-	ON avg_act_by_ID.Id = avg_sleep_by_ID.Id                      --save the result as a table: avg_act_sleep_by_ID
-ORDER BY avg_act_by_ID.Id
-
-	
-----------------
-
-	
---8) Find the days where the most and least activity take place on 
+--7) Find the days where the most and least activity take place on 
 
 DROP TABLE IF exists avg_activity_per_day
 CREATE TABLE avg_activity_per_day                            -- save the result as a table: avg_act_per_day
@@ -173,11 +161,11 @@ ORDER BY avg_steps
 --The average amount of calories burnt every day revolves around 2300 calories, with only Sundays and Thursdays with less than 2,300 calories.
 --The most sedentary day is Mondays with an average duration of 1,028 minutes. The least sedentary day is Thursdays with 962 minutes. 
 
-	
+
 ----------------
 
-	
---9) Find the days where the most and least sleep take place on 
+
+--8) Find the days where the most and least sleep take place on 
 
 DROP TABLE IF exists avg_sleep_per_day
 CREATE TABLE avg_sleep_per_day                            -- save the result as a table: avg_sleep_per_day
@@ -217,11 +205,11 @@ GROUP BY
 --For the rest of the week, users sleep on average 6.7 hours
 --Sundays are the days with the most hours awake in bed with 8.39 hours. 
 
-	
+
 ----------------
 
-	
---10-a) Activity trends over time 
+
+--9-a) Activity trends over time 
 
 SELECT DISTINCT Id, ActivityDate,
 	AVG (Totalsteps) AS avg_steps,
@@ -235,11 +223,11 @@ FROM FitbitProject..daily_activity
 GROUP BY ActivityDate, Id
 ORDER BY ActivityDate, Id
 
-	
+
 ----------------
 
-	
---10-b) Logging trend of the users for the activities
+
+--9-b) Logging trend of the users for the activities
 
 SELECT DISTINCT ActivityDate,
 	COUNT (Id) AS Logs
@@ -248,9 +236,11 @@ GROUP BY ActivityDate
 ORDER BY ActivityDate
 --With time, the number of logs seems to decrease: users commit less and less to logging
 
+
 ----------------
 
---10-c) Average steps per day over time 
+
+--9-c) Average steps per day over time 
 
 SELECT DISTINCT ActivityDate,
 	AVG (Totalsteps) AS avg_steps,
@@ -259,11 +249,11 @@ FROM FitbitProject..daily_activity
 GROUP BY ActivityDate
 ORDER BY ActivityDate
 
-	
+
 ----------------
 
-	
---11-a) Sleep trends over time 	
+
+--10-a) Sleep trends over time 	
 
 SELECT DISTINCT Id, SleepDay,
 	COUNT (Id) AS Logs,
@@ -273,24 +263,24 @@ FROM FitbitProject..daily_sleep
 GROUP BY SleepDay, Id                                                      
 ORDER BY SleepDay, Id
 
-	
+
 ----------------
 
-	
---11-b) Logging trend of the users for the activities
+
+--10-b) Logging trend of the users for the activities
 
 SELECT DISTINCT SleepDay,
 	COUNT (Id) AS Logs
 FROM FitbitProject..daily_sleep
 GROUP BY SleepDay                                                   
 ORDER BY SleepDay
---Of the 24 users that have unique IDs for the sleeping data, there are only 13 to 17 logs per day
+--Of the 24 users that have a unique ID for the sleeping data, there are only 13 to 17 logs per day
 
-	
+
 ----------------
 
-	
---11-c) Correlation between the average sleeping hours and the average hours spent awake in bed per ID
+
+--10-c) Correlation between the average sleeping hours and the average hours spent awake in bed per ID
 
 SELECT DISTINCT  Id,
 	AVG (TotalMinutesAsleep)/60 AS avg_asleep_hrs,
@@ -300,11 +290,11 @@ GROUP BY  Id
 ORDER BY  Id
 --The longer users sleep, the more time awake they will experience throughout their sleep cycles.
 
-	
+
 ----------------
 
-	
---11-d) Average sleeping hours and average hours spent awake in bed over time
+
+--10-d) Average sleeping hours and average hours spent awake in bed over time
 
 SELECT DISTINCT  SleepDay,
 	AVG (TotalMinutesAsleep)/60 AS avg_asleep_hrs,
@@ -313,11 +303,11 @@ FROM FitbitProject..daily_sleep
 GROUP BY  SleepDay                                                    
 ORDER BY  SleepDay
 
-	
+
 ----------------
 
-	
---12) Variation of steps per day
+
+--11) Variation of steps per day
 
 DROP TABLE IF exists avg_step_per_day
 CREATE TABLE avg_step_per_day                            -- save the result as a table: avg_step_per_day
