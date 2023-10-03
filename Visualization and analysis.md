@@ -23,9 +23,7 @@ the more calories are burned. This proves that the average number of very active
 
 ![Number of Users that Logged Activity and Sleep Data Over Time (1)](https://github.com/EdwinKhoury/FitBit-Project/assets/146214280/73c8ba07-8c0e-4484-ac06-9f1f32c19556)
 
-There are 33 users who log their activity data. From April 12 to May 12, the log activity for their activities decreased in a very slow manner, from 33 users to 21. This means that with time, fewer and fewer users commit to logging.
-There are 24 users who log their sleep data. From April 12 to May 12, the log activity for their sleep varies a lot, with a maximum number of logs of only 17. Throughout the whole data recording, it never occurred that the 
-24 users all log their sleep on the same day. Only 8 out of 24 people logged their sleep on May 12th.
+There are 33 users who log their activity data. From April 12 to May 12, the log activity for their activities decreased in a very slow manner, from 33 users to 21. This means that with time, fewer and fewer users commit to logging. There are 24 users who log their sleep data. From April 12 to May 12, the log activity for their sleep varies a lot, with a maximum number of logs of only 17. Throughout the whole data recording, it never occurred that the 24 users all logged their sleep on the same day. Only 8 out of 24 people logged their sleep on May 12th.
 
 
 ## **Steps During the Week**
@@ -39,8 +37,7 @@ Sunday is the only day of the week with an average number of steps less than 7,0
 
 ![Average Calories Burned Vs Average Steps](https://github.com/EdwinKhoury/FitBit-Project/assets/146214280/14b04102-e048-48ce-bcdd-40b750fd0372)
 
-For every user, their average daily steps taken and their calories burned are monitored. The trendline in the above scatter plot shows a clear positive and strong correlation between the steps taken and 
-the calories burned. The more steps are taken, the more the user burns calories.
+For every user, their average daily steps taken and their calories burned are monitored. The trendline in the above scatter plot shows a clear positive and strong correlation between the steps taken and the calories burned. The more steps are taken, the more the user burns calories.
 
 
 ## **Time Asleep vs. Time Awake**
