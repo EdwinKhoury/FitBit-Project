@@ -2,7 +2,7 @@
 
 ## **Daily Active Minutes**
 
-
+![Average Min of Activity per Day of the Week](https://github.com/EdwinKhoury/FitBit-Project/assets/146214280/d153c8be-9138-4645-92e5-d576151214f7)
 
 During the week, Saturdays are the most active day, with an average total of 244.2 minutes of activity, whether it is very, fairly, or lightly active minutes.
 Sunday is the less active day, with an average total of 208.5 minutes. Also, the biggest portion of activities made during any day of the week are light, with an average time variation between 174 and 207.1 minutes.
@@ -11,10 +11,12 @@ Average very active minutes vary between 19.4 and 23.1 minutes. The type of inte
 
 ## **Activity Intensity vs. Burned Calories**
 
+![Fairly Active Minutes vs Calories Burned](https://github.com/EdwinKhoury/FitBit-Project/assets/146214280/84130a12-e2a6-42a7-bf31-d7049aeaa684) ![Very Active Minutes vs Calories Burned](https://github.com/EdwinKhoury/FitBit-Project/assets/146214280/a41a42b2-b06e-4ef8-9a47-a6e368e73fe6)
+
+
 
 For every user, the average number of calories burned is given. The minutes of activity and their intensity are also correlated with the calories burned. As shown by the scatter plots, the more intense the activity, 
-the more calories are burned. This proves that the average number of very active minutes and the average number of calories burned are strongly correlated, whereas the fairly and lightly active minutes are not very reflective
-of the calories burned.
+the more calories are burned. This proves that the average number of very active minutes and the average number of calories burned are strongly correlated, whereas the fairly and lightly active minutes are not very reflective of the calories burned.
 
 
 ## **Logging Trends**
